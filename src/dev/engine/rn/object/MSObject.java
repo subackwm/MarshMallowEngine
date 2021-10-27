@@ -99,7 +99,6 @@ public class MSObject implements Comparable<MSObject> {
 	public void engineRender(Graphics g) {
 		if (this instanceof MSObject) {
 			double fx = 1, fy = 1;
-			double _fx, _fy;
 			int Width = MSDisplay.width, Height = MSDisplay.height;
 
 			renderWidth = width * MSCamera.position.GetZ();
@@ -117,12 +116,6 @@ public class MSObject implements Comparable<MSObject> {
 				fy = -1;
 				_hh *= -1;
 			}
-
-			_fx = fx;
-			_fy = fy;
-
-			_ww *= _fx;
-			_hh *= _fy;
 
 			this.renderWidth *= fx;
 			this.renderHeight *= fy;
@@ -155,9 +148,9 @@ public class MSObject implements Comparable<MSObject> {
 			AffineTransform a = new AffineTransform();
 
 			a.translate(this.renderPosition.GetX(), this.renderPosition.GetY());
-			a.scale(_fx, _fy);
 
-			a.rotate(this.rotation * _fx * _fy + MSCamera.rotation, this.renderWidth / 2, this.renderHeight / 2);
+			a.rotate(this.rotation + MSCamera.rotation, this.renderWidth / 2,
+					this.renderHeight / 2);
 
 			g2d.setTransform(a);
 
@@ -214,7 +207,7 @@ public class MSObject implements Comparable<MSObject> {
 	public final BufferedImage getBackupSprite() {
 		return backUpSprite;
 	}
-	
+
 	public final boolean IsRendering() {
 		return isRender;
 	}

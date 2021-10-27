@@ -8,30 +8,34 @@ import dev.engine.rn.resource.MSResource;
 
 public class MSSprite {
 
-    private BufferedImage image;
+	private BufferedImage image;
 
-    public MSSprite(String path) {
-	image = new MSResource().GetImage(path);
-    }
+	public MSSprite(String path) {
+		image = new MSResource().GetImage(path);
+	}
 
-    public BufferedImage GetImage() {
-	return image;
-    }
+	public MSSprite(BufferedImage image) {
+		this.image = image;
+	}
 
-    public void SetImage(BufferedImage image) {
-	this.image = image;
-    }
+	public BufferedImage GetImage() {
+		return image;
+	}
 
-    public BufferedImage CutImage(int x, int y, int w, int h) {
-	BufferedImage cutImage = Clone();
-	return cutImage.getSubimage(x, y, w, h);
-    }
+	public void SetImage(BufferedImage image) {
+		this.image = image;
+	}
 
-    public BufferedImage Clone() {
-	ColorModel cm = image.getColorModel();
-	boolean isAlphaPremultiplied = cm.isAlphaPremultiplied();
-	WritableRaster raster = image.copyData(null);
-	return new BufferedImage(cm, raster, isAlphaPremultiplied, null);
-    }
+	public MSSprite CutImage(int x, int y, int w, int h) {
+		BufferedImage cutImage = Clone();
+		return new MSSprite(cutImage.getSubimage(x, y, w, h));
+	}
+
+	public BufferedImage Clone() {
+		ColorModel cm = image.getColorModel();
+		boolean isAlphaPremultiplied = cm.isAlphaPremultiplied();
+		WritableRaster raster = image.copyData(null);
+		return new BufferedImage(cm, raster, isAlphaPremultiplied, null);
+	}
 
 }
