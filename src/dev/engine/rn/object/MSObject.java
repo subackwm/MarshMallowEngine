@@ -149,8 +149,7 @@ public class MSObject implements Comparable<MSObject> {
 
 			a.translate(this.renderPosition.GetX(), this.renderPosition.GetY());
 
-			a.rotate(this.rotation + MSCamera.rotation, this.renderWidth / 2,
-					this.renderHeight / 2);
+			a.rotate(this.rotation + MSCamera.rotation, anchor.GetX(), anchor.GetY());
 
 			g2d.setTransform(a);
 
