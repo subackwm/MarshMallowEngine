@@ -34,7 +34,7 @@ public class MSObject implements Comparable<MSObject> {
 	public MSObject(int x, int y, int width, int height) {
 		position = new MSTrans(x, y, 1f);
 		renderPosition = new MSTrans(x, y, 1f);
-		anchor = new MSTrans(width / 2, height / 2);
+		anchor = new MSTrans(0.5f, 0.5f);
 		this.width = width;
 		this.height = height;
 	}
@@ -149,7 +149,8 @@ public class MSObject implements Comparable<MSObject> {
 
 			a.translate(this.renderPosition.GetX(), this.renderPosition.GetY());
 
-			a.rotate(this.rotation + MSCamera.rotation, anchor.GetX(), anchor.GetY());
+			a.rotate(this.rotation + MSCamera.rotation, this.renderWidth * anchor.GetX(),
+					this.renderHeight * anchor.GetY());
 
 			g2d.setTransform(a);
 
