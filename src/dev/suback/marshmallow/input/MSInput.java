@@ -8,6 +8,9 @@ import java.awt.event.MouseMotionListener;
 import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
 
+import dev.suback.marshmallow.MSDisplay;
+import dev.suback.marshmallow.camera.MSCamera;
+import dev.suback.marshmallow.math.MSMath;
 import dev.suback.marshmallow.transform.MSTrans;
 
 public class MSInput implements KeyListener, MouseListener, MouseMotionListener, MouseWheelListener {
@@ -15,6 +18,7 @@ public class MSInput implements KeyListener, MouseListener, MouseMotionListener,
 	public static boolean keys[] = new boolean[KeyEvent.KEY_LAST];
 	public static int mouseScrollType;
 	public static MSTrans mousePointer = new MSTrans(0, 0);
+	public static MSTrans mousePointerMaster = new MSTrans(0, 0);
 	public static MSTrans screenMousePointer = new MSTrans(0, 0);
 	public static boolean mouseLeft, mouseRight, mouseCenter;
 
@@ -22,6 +26,26 @@ public class MSInput implements KeyListener, MouseListener, MouseMotionListener,
 	public void mouseDragged(MouseEvent e) {
 		mousePointer.SetX(e.getX());
 		mousePointer.SetY(e.getY());
+	}
+
+	public static void setMasterMouse() {
+		int Width = MSDisplay.width, Height = MSDisplay.height;
+
+		double _dist = MSMath.GetDistance(
+				new MSTrans(Width / 2 + MSCamera.position.GetX(), Height / 2 + MSCamera.position.GetY()),
+				new MSTrans(mousePointer.GetX(), mousePointer.GetY()));
+		double _rot = Math.atan2(Height / 2 + MSCamera.position.GetY() - mousePointer.GetY(),
+				Width / 2 + MSCamera.position.GetX() - mousePointer.GetX()) - MSCamera.rotation;
+		
+		double xx = (mousePointer.GetX() - (Width / 2 + MSCamera.position.GetX()));
+		double yy = (mousePointer.GetY() - (Height / 2 + MSCamera.position.GetY()));
+		double _zDist = _dist / (MSCamera.position.GetZ());
+
+		double _zx = (Math.cos(_rot) * _zDist), _zy = (Math.sin(_rot) * _zDist);
+
+		mousePointerMaster.SetX((mousePointer.GetX() - MSCamera.position.GetX() - (xx + _zx)));
+		mousePointerMaster.SetY((mousePointer.GetY() - MSCamera.position.GetY() - (yy + _zy)));
+
 	}
 
 	@Override
@@ -92,6 +116,7 @@ public class MSInput implements KeyListener, MouseListener, MouseMotionListener,
 	}
 
 	public static void update() {
+		setMasterMouse();
 	}
 
 	@Override

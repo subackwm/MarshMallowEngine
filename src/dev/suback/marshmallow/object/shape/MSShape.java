@@ -12,7 +12,7 @@ import dev.suback.marshmallow.math.MSMath;
 import dev.suback.marshmallow.object.MSObject;
 import dev.suback.marshmallow.transform.MSTrans;
 import dev.suback.marshmallow.ui.MSUI;
-
+import dev.suback.marshmallow.ui.MSUIText;
 import dev.suback.marshmallow.MSDisplay;
 import dev.suback.marshmallow.MSMain;
 
@@ -109,6 +109,39 @@ public class MSShape extends MSObject {
 		MSMain.renderObjects.add(ui);
 	}
 
+	public static final void RenderUIImage(MSSprite sprite, int x, int y, int width, int height) {
+		MSUI uiImage = new MSUI(x, y, width, height);
+		uiImage.SetSprite(sprite);
+		MSMain.renderObjects.add(uiImage);
+	}
+
+	public static final void RenderUIImage(MSSprite sprite, int x, int y, double z, int width, int height) {
+		MSUI uiImage = new MSUI(x, y, width, height);
+		uiImage.position.SetZ(z);
+		uiImage.SetSprite(sprite);
+		MSMain.renderObjects.add(uiImage);
+	}
+
+	public static final void RenderUIImage(MSSprite sprite, int x, int y, double z, float rotation, int width, int height) {
+		MSUI uiImage = new MSUI(x, y, width, height);
+		uiImage.SetRotation(rotation);
+		uiImage.position.SetZ(z);
+		uiImage.SetSprite(sprite);
+		MSMain.renderObjects.add(uiImage);
+	}
+	
+	public static final void RenderUIText(String text, int x, int y, double z){
+		MSUIText uiText = new MSUIText(text, x, y, 100, 100);
+		MSMain.renderObjects.add(uiText);
+	}
+
+	public static final void RenderUIText(String text, int x, int y, double z, float rotation) {
+		MSUIText uiText = new MSUIText(text, x, y, 100, 100);
+		uiText.SetRotation(rotation);
+		uiText.position.SetZ(z);
+		MSMain.renderObjects.add(uiText);
+	}
+
 	@Override
 	public void engineRender(Graphics g) {
 		if (this instanceof MSObject) {
@@ -116,8 +149,8 @@ public class MSShape extends MSObject {
 			double fx = 1, fy = 1;
 			int Width = MSDisplay.width, Height = MSDisplay.height;
 
-			renderWidth = GetWidth() * MSCamera.position.GetZ();
-			renderHeight = GetHeight() * MSCamera.position.GetZ();
+			renderWidth = GetWidth() * (MSCamera.position.GetZ());
+			renderHeight = GetHeight() * (MSCamera.position.GetZ());
 
 			double _ww = this.renderWidth / 2;
 			double _hh = this.renderHeight / 2;

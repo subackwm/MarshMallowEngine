@@ -28,7 +28,7 @@ public class MSUI extends MSObject {
 			AffineTransform backup = g2d.getTransform();
 
 			float renderX = (int) position.GetX() - GetWidth() / 2, renderY = (int) position.GetY() - GetHeight() / 2;
-
+			
 			AffineTransform a = AffineTransform.getRotateInstance(GetRotation(), renderX + GetAnchor().GetX() * xflip,
 					renderY + GetAnchor().GetY() * yflip);
 

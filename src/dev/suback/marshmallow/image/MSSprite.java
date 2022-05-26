@@ -1,12 +1,7 @@
 package dev.suback.marshmallow.image;
 
 import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
-import java.awt.image.ColorModel;
-import java.awt.image.DataBufferByte;
-import java.awt.image.WritableRaster;
 
 import dev.suback.marshmallow.resource.MSResource;
 

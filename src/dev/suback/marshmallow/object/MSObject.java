@@ -91,8 +91,8 @@ public class MSObject implements Comparable<MSObject> {
 			double fx = 1, fy = 1;
 			int Width = MSDisplay.width, Height = MSDisplay.height;
 
-			renderWidth = width * MSCamera.position.GetZ();
-			renderHeight = height * MSCamera.position.GetZ();
+			renderWidth = width * (MSCamera.position.GetZ());
+			renderHeight = height * (MSCamera.position.GetZ());
 
 			double _ww = this.renderWidth / 2;
 			double _hh = this.renderHeight / 2;
@@ -156,8 +156,7 @@ public class MSObject implements Comparable<MSObject> {
 
 			g2d.setTransform(backup);
 
-		} else
-			System.out.println("¿Ã ææπﬂ∑√¿Ã?");
+		}
 	}
 
 	public final void SetSprite(MSSprite sprite) {

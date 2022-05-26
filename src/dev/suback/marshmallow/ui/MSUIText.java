@@ -21,7 +21,7 @@ public class MSUIText extends MSUI {
 		if (this instanceof MSObject) {
 
 			Graphics2D g2d = (Graphics2D) g;
-
+			
 			AffineTransform backup = g2d.getTransform();
 
 			float renderX = (int) position.GetX() - GetWidth() / 2, renderY = (int) position.GetY() - GetHeight() / 2;
