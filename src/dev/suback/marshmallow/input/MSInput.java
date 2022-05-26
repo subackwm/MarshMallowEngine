@@ -32,19 +32,19 @@ public class MSInput implements KeyListener, MouseListener, MouseMotionListener,
 		int Width = MSDisplay.width, Height = MSDisplay.height;
 
 		double _dist = MSMath.GetDistance(
-				new MSTrans(Width / 2 + MSCamera.position.GetX(), Height / 2 + MSCamera.position.GetY()),
+				new MSTrans(Width / 2, Height / 2),
 				new MSTrans(mousePointer.GetX(), mousePointer.GetY()));
-		double _rot = Math.atan2(Height / 2 + MSCamera.position.GetY() - mousePointer.GetY(),
-				Width / 2 + MSCamera.position.GetX() - mousePointer.GetX()) - MSCamera.rotation;
-		
+		double _rot = Math.atan2(Height / 2 - mousePointer.GetY(),
+				Width / 2 - mousePointer.GetX()) - MSCamera.rotation;
+
 		double xx = (mousePointer.GetX() - (Width / 2 + MSCamera.position.GetX()));
 		double yy = (mousePointer.GetY() - (Height / 2 + MSCamera.position.GetY()));
 		double _zDist = _dist / (MSCamera.position.GetZ());
 
 		double _zx = (Math.cos(_rot) * _zDist), _zy = (Math.sin(_rot) * _zDist);
 
-		mousePointerMaster.SetX((mousePointer.GetX() - MSCamera.position.GetX() - (xx + _zx)));
-		mousePointerMaster.SetY((mousePointer.GetY() - MSCamera.position.GetY() - (yy + _zy)));
+		mousePointerMaster.SetX((mousePointer.GetX() - (xx + _zx)));
+		mousePointerMaster.SetY((mousePointer.GetY() - (yy + _zy)));
 
 	}
 

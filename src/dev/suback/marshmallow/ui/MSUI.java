@@ -5,8 +5,9 @@ import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
 
 import dev.suback.marshmallow.object.MSObject;
+import dev.suback.marshmallow.object.shape.MSShape;
 
-public class MSUI extends MSObject {
+public class MSUI extends MSShape {
 
 	public MSUI(int x, int y, int width, int height) {
 		super(x, y, width, height);

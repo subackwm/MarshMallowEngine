@@ -22,9 +22,11 @@ public class MSUIText extends MSUI {
 
 			Graphics2D g2d = (Graphics2D) g;
 			
+			
 			AffineTransform backup = g2d.getTransform();
 
 			float renderX = (int) position.GetX() - GetWidth() / 2, renderY = (int) position.GetY() - GetHeight() / 2;
+			g2d.setColor(pColor);
 
 			FontMetrics fm = g2d.getFontMetrics();
 			int w = (int) (renderX * 2);
